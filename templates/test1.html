@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nhập thông tin để dự đoán</title>
+</head>
+<body>
+    <h1>Nhập thông tin để dự đoán</h1>
+    <form action="/predict" method="post">
+        <label for="numInputs">Số lần muốn nhập:</label>
+        <input type="number" id="numInputs" name="numInputs"><br><br>
+
+        <div id="inputFields"></div><br>
+
+        <input type="submit" value="Predict Label">
+    </form>
+
+    <script>
+        document.getElementById("numInputs").addEventListener("change", function() {
+            var numInputs = parseInt(this.value);
+            var inputFieldsDiv = document.getElementById("inputFields");
+            inputFieldsDiv.innerHTML = '';
+
+            for (var i = 1; i <= numInputs; i++) {
+                var heading = document.createElement("h2");
+                heading.textContent = "Lần nhập thứ " + i;
+                inputFieldsDiv.appendChild(heading);
+
+                var labels = ["setting1", "setting2", "s2", "s3", "s4", "s7", "s8", "s11", "s12", "s13", "s14", "s15", "s17", "s20", "s21"];
+
+                for (var j = 0; j < labels.length; j++) {
+                    var label = document.createElement("label");
+                    label.setAttribute("for", labels[j] + "_" + i);
+                    label.textContent = labels[j] + " của lần nhập " + i + ":";
+
+                    var input = document.createElement("input");
+                    input.setAttribute("type", "text");
+                    input.setAttribute("id", labels[j] + "_" + i);
+                    input.setAttribute("name", labels[j] + "_" + i);
+
+                    inputFieldsDiv.appendChild(label);
+                    inputFieldsDiv.appendChild(input);
+                    inputFieldsDiv.appendChild(document.createElement("br"));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
